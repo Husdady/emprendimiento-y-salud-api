@@ -2,12 +2,12 @@
 const { sender, transport } = require('./config')
 
 // Env variables
-const { ORIGIN, APP_NAME } = process.env
+const { APP_NAME, DASHBOARD_URL } = process.env
 
 // Enviar una confirmación por correo electrónico a un usuario que ha creado un cuenta en la aplicación
 exports.sendEmailConfirmation = async function({ user, confirmationCode }) {
   const to = [{ email: user.email }]
-  const confirmationLink = `${ORIGIN}/auth/email/success/confirmation${confirmationCode.replace(/\@/g, '%40')}`
+  const confirmationLink = `${DASHBOARD_URL}/auth/email/success/confirmation${confirmationCode.replace(/\@/g, '%40')}`
 
   try {
     await transport.sendTransacEmail({
@@ -31,7 +31,7 @@ exports.sendEmailConfirmation = async function({ user, confirmationCode }) {
 // Enviar una confirmación por correo electrónico a un usuario para actualizar tu contraseña
 exports.sendPasswordConfirmation = async function({ user, confirmationCode }) {
   const to = [{ email: user.email }]
-  const confirmationLink = `${ORIGIN}/auth/password/recovery${confirmationCode.replace(/\@/g, '%40')}`
+  const confirmationLink = `${DASHBOARD_URL}/auth/password/recovery${confirmationCode.replace(/\@/g, '%40')}`
 
   try {
     await transport.sendTransacEmail({

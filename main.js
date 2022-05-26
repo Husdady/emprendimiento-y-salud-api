@@ -31,9 +31,9 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Definir puerto
-const port = process.env.PORT
+const port = process.env.PORT || 4000
 
 // Iniciar app en puerto definido
-app.listen(port || 4000, function() {
+app.listen(port, function() {
   console.log('[INFO]', `The server is running on ${process.env.PUBLIC_URL}`)
 })

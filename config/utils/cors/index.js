@@ -15,7 +15,7 @@ const origin = (url, callback) => {
   if (!url) return callback(null, true)
 
   // Comprobar si la url está entre los dominios permitidos
-  const isAllowedDomain = allowedDomains.indexOf(origin) === -1
+  const isAllowedDomain = allowedDomains.indexOf(url) === -1
 
   if (!isAllowedDomain) {
     return callback(null, true)

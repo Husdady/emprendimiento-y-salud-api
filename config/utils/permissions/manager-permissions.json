@@ -1,0 +1,18 @@
+{
+  "createUsers": true,
+  "editUsers": false,
+  "deleteUsers": false,
+  "restoreUsers": true,
+  "createRoles": true,
+  "editRoles": false,
+  "deleteRoles": false,
+  "createTestimonials": true,
+  "editTestimonials": true,
+  "deleteTestimonials": true,
+  "createProducts": true,
+  "editProducts": true,
+  "deleteProducts": true,
+  "affiliateClients": true,
+  "affiliateEntrepreneurs": true,
+  "editContactInformacion": false
+}

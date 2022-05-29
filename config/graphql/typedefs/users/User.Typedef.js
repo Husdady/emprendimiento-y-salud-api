@@ -30,17 +30,11 @@ const UserFiltersTypedef = createGraphQLObjectType('UserFilters', {
 }, "input");
 
 
-// Avatar Settings User Typedef
-const AvatarTypedef = createGraphQLObjectType('UserSettingsAvatar', {
+// Profile Photo User Typedef
+const ProfilePhotoTypedef = createGraphQLObjectType('UserProfilePhoto', {
   url: GraphQLString,
   width: GraphQLString,
   heigth: GraphQLString,
-})
-
-// Settings User Typedef
-const SettingsTypedef = createGraphQLObjectType('UserSettings', {
-  theme: GraphQLString,
-  avatar: AvatarTypedef,
 })
 
 // Settings User Typedef
@@ -54,9 +48,12 @@ const UserFieldsTypedef = createGraphQLObjectType('UserFields', {
   fullname: GraphQLString,
   email: GraphQLString,
   role: RoleTypedef,
-  settings: SettingsTypedef,
+  profilePhoto: ProfilePhotoTypedef,
   deleted: GraphQLBoolean,
-  verifyEmail: GraphQLBoolean,
+  verifiedEmail: GraphQLBoolean,
+  secretKey: GraphQLString,
+  emailConfirmation: GraphQLString,
+  passwordConfirmation: GraphQLString,
   deletedAt: GraphQLDateTime,
   createdAt: GraphQLDateTime,
   updatedAt: GraphQLDateTime,

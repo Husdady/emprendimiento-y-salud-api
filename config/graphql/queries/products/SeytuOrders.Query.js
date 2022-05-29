@@ -15,7 +15,7 @@ const { paginate } = require("@utils/Pagination");
 const { setArguments } = require("@utils/Helper");
 
 // Seytu Orders Query
-const seytu_orders = {
+exports.seytu_orders = {
   type: OrdersTypedef,
   args: setArguments({
     skip: GraphQLInt,
@@ -33,7 +33,7 @@ const seytu_orders = {
       }
 
       const seytuOrders = await paginate({
-        model: OmnilifeOrders,
+        model: SeytuOrders,
         extraFields: {
           $unwind: "$clientProducts",
           $lookup: {
@@ -50,6 +50,7 @@ const seytu_orders = {
               status: "$clientProducts.status",
               totalUnits: "$clientProducts.totalUnits",
               creationDate: "$clientProducts.creationDate",
+              optionalMessage: "$clientProducts.optionalMessage",
               product: { $arrayElemAt: ["$clientProducts.product", 0] },
             },
           },
@@ -67,13 +68,13 @@ const seytu_orders = {
         items: items,
       }
     } catch (err) {
-      console.error('[SeytuQuery.orders]', err)
+      console.error('[SeytuQuery.orders.error]', err)
     }
   },
 }
 
 // Seytu Client Orders Query
-const seytu_client_orders = {
+exports.seytu_client_orders = {
   type: ClientOrdersTypedef,
   args: setArguments({
     skip: GraphQLInt,
@@ -124,12 +125,7 @@ const seytu_client_orders = {
         }))
       }
     } catch (err) {
-      console.error('[SeytuQuery.clientOrders]', err)
+      console.error('[SeytuQuery.clientOrders.error]', err)
     }
   },
-}
-
-module.exports = {
-  seytu_orders,
-  seytu_client_orders,
 }

@@ -15,7 +15,7 @@ const { setArguments } = require("@utils/Helper");
 const { paginate, setOrdersFilters } = require("@utils/Pagination");
 
 // Omnilife Orders Query
-const omnilife_orders = {
+exports.omnilife_orders = {
   type: OrdersTypedef,
   args: setArguments({
     skip: GraphQLInt,
@@ -55,6 +55,7 @@ const omnilife_orders = {
               status: "$clientProducts.status",
               totalUnits: "$clientProducts.totalUnits",
               creationDate: "$clientProducts.creationDate",
+              optionalMessage: "$clientProducts.optionalMessage",
               product: { $arrayElemAt: ["$clientProducts.product", 0] },
             },
           },
@@ -72,13 +73,13 @@ const omnilife_orders = {
         items: items,
       }
     } catch (err) {
-      console.error('[OmnilifeQuery.orders]', err)
+      console.error('[OmnilifeQuery.orders.error]', err)
     }
   },
 }
 
 // Omnilife Client Orders Query
-const omnilife_client_orders = {
+exports.omnilife_client_orders = {
   type: ClientOrdersTypedef,
   args: setArguments({
     skip: GraphQLInt,
@@ -128,12 +129,7 @@ const omnilife_client_orders = {
 
       return OmnilifeOrders.findOne({ clientId }).populate("clientProducts.product").lean();
     } catch (err) {
-      console.error('[OmnilifeQuery.clientOrders]', err)
+      console.error('[OmnilifeQuery.clientOrders.error]', err)
     }
   },
-}
-
-module.exports = {
-  omnilife_orders,
-  omnilife_client_orders,
 }

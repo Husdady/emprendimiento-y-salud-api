@@ -15,15 +15,15 @@ const origin = (url, callback) => {
   if (!url) return callback(null, true)
 
   // Comprobar si la url está entre los dominios permitidos
-  const isAllowedDomain = allowedDomains.indexOf(url) === -1
+  const isAllowedDomain = allowedDomains.some(allowedDomain => url.includes(allowedDomain))
 
   if (!isAllowedDomain) {
-    return callback(null, true)
+    const msg = new Error(`This site ${url} does not have an access. Only specific domains are allowed to access it.`)
+    
+    return callback(msg, false)
   }
 
-  const msg = new Error(`This site ${url} does not have an access. Only specific domains are allowed to access it.`)
-  
-  return callback(msg, false)
+  return callback(null, true)
 }
 
 module.exports = function(app) {
